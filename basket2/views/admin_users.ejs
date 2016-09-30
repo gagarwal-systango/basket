@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shopping Cart</title>
+<link rel="stylesheet" type="text/css" href="css/c_style.css">
+</head>
+<body>
+
+<header>
+  <% include header.ejs %>
+</header>
+
+    <br>
+    
+    <div align="left" >
+     <%  for(var user=0; user<users.length; user++){ %>
+     <table style=" solid #d9d9d9""><tr><td>
+     
+     <table cellspacing="15">
+       
+      <tr>
+          <td >
+            <label for="user_id" >UserId:</label><br>
+            <td><%= users[user].user_id %></td>
+        </tr> 
+
+       <tr>
+          <td >
+            <label for="name" >Name:</label><br>
+            <td><%= users[user].name %></td>
+        </tr>      
+    
+        <tr>
+          <td >
+            <label for="address" >Address:</label><br>
+            <td><%= users[user].address %></td>
+              
+        </tr>
+       <tr>
+          <td >
+            <label for="mobile" >Mobile No:</label><br>
+            <td><%= users[user].mobile %></td>
+            
+          </td>
+       </tr>
+
+     </table>
+ </td></tr></table>
+     <% } %>
+     </td></tr></table>
+  </div>
+
+<footer>
+  <% include footer.ejs %>
+</footer>
+
+</body>
+</html>

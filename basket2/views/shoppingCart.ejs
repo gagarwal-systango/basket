@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shopping Cart</title>
+<link rel="stylesheet" type="text/css" href="css/c_style.css">
+</head>
+<body>
+
+<header>
+  <% include header.ejs %>
+</header>
+
+    <br>
+    <center>
+    <h1>Items in your cart</h1>
+    <table width="70%" style="border: solid 1px black" cellspacing="5px">
+    <tr style="color: black">
+      <td align="center"><span class="table">Product</span></td>
+      <td align="center"><span class="table">Price</span></td>
+      <td align="center"><span class="table">Quantity</span></td>
+      <td align="center"><span class="table">Total</span></td>
+    </tr>
+
+<% for(var i=0; i<products.length; i++) { %>
+    <tr style="color: black">
+      <td align="center"><span class="table"><%= products[i].item.title %></span></td>
+      <td align="center"><span class="table"><%= products[i].item.price %></span></td>
+      <td align="center"><span class="table"><%= products[i].qty %></span></td>
+      <td align="center"><span class="table"><%= products[i].price %></span></td>
+      <td>
+          <form action="/add-to-cart/reduce/<%= products[i].item._id %>" method="get" name="reduce">
+          <button name="name" type="submit" value="" style="backgroundcolor:#B0C4DE;color:black;height:25px;width:60px; border-radius: 15px">reduce</button>
+          </form> 
+          </td>
+    </tr>
+<% } %>
+
+   </table>
+   <br>
+   <p class="more">Want to shop more??</p>
+     <span class="link2">
+     <table width="35%">
+       <tr>
+         <td align="center">
+            <a href="/products">Products</a>
+         </td>
+    </table>
+    </span>
+
+    <h2>
+    Your Order Total : Rs <%= totalPrice %>
+   </h2>
+    <form action="/add-to-cart/checkout">
+      <input type="submit" value="Proceed To Checkout" style="background-color:#B0C4DE;color:black;font-size:25px">
+    </form>
+    </center>
+    
+<footer>
+  <% include footer.ejs %>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shopping Cart</title>
+<link rel="stylesheet" type="text/css" href="css/c_style.css">
+<style type="text/css">
+.header{
+       background-color:#B0C4DE;
+  height: 100px;
+  margin: 0px;
+padding: 0px;
+       }
+    
+.Main {
+                font-family: ;
+                color: ;
+                font-size: ;
+    background-color: white;
+                background-image: url("https://www.tnooz.com/wp-content/uploads/2012/09/laptop-shopping-basket.jpg"); 
+                background-size: cover;
+            
+
+                height: 700px;
+            }
+
+    .footer{
+       background-color:black;
+       color:#CCCCCC;
+       align:center
+       }
+    .link1 a:link{
+      color:black;
+      text-decoration:none;
+      }
+      .link1 a:visited{
+      color:black;
+      text-decoration:none;
+      }
+     .link1 a:hover{
+      color:red;
+      text-decoration:none;
+      }
+      .link1 a:active{
+      color:red;
+      text-decoration:none;
+      }
+    .link2 a:link, .link2 a:visited {
+       border: solid 2px orange;
+       background-color: white;
+       color: orange;
+       padding: 4px 25px;
+       text-align: center; 
+       text-decoration: none;
+       display: inline-block;
+       border-radius: 25px;
+      }
+    .link2 a:hover, .link2 a:active {
+       background-color: orange;
+       color:white;
+       border-radius: 25px;
+      }
+    .link3 a:link{
+      color:#CCCCCC;
+      text-decoration:none;
+      }
+      .link3 a:visited{
+      color:#CCCCCC;
+      text-decoration:none;
+      }
+     .link3 a:hover{
+      color:red;
+      text-decoration:none;
+      }
+      .link3 a:active{
+      color:red;
+      text-decoration:none;
+      }
+    .p{
+        font-size:15px;
+        color:black}
+    .item{
+         font-size:25px}
+    .desc{
+         color:black;
+    }
+    .price{
+      font-size:20px;
+      font-family:sans;}
+    .table{
+      color:black;
+      font-family:sans;
+      }
+    .details{
+      color:gray;
+      font-family:sans;}
+    .more{
+      color:#3399ff;
+      font-size:20px;
+      font-family:sans;
+      }
+    body{
+       font-family:Sans MS;
+    height: 100%;
+                margin: 0;
+                text-align: center;
+                width: 100%;
+             
+     background-color: #FF6FFFF;}
+
+</style>
+</head>
+<body>
+
+<header>
+  <% include header.ejs %>
+</header>
+
+    
+<center>
+ 
+   <h1 style="color:black">Your Orders</h1>
+
+  
+  <div style="display:inline-block; margin-top:5px;">
+    <% for(var i=orders.length-1; i>=0; i--) { %>
+    <div style:"padding:40px" style="border:1px solid gray; background-color: #F2F1F0">
+      <h4>Ship To: <%= orders[i].name %></h4>
+    </div>
+      <table width="100%" style="border:1px solid gray" cellspacing="5px">
+        <tr style="color: black">
+          <td align="left" style="padding:10px">Product</td>
+          <td align="left" style="padding:10px">Price</td>
+          <td align="center" style="padding:10px">Quantity</td>
+          <td align="center" style="padding:10px">Total</td>
+        </tr>
+        <% for(var key in orders[i].cart.items) { %>
+        <tr style="color: black">
+          <td align="left" style="padding:10px"><%= orders[i].cart.items[key].item.title %></td>
+          <td align="left" style="padding:10px"><%= orders[i].cart.items[key].item.price %></td>
+          <td align="center" style="padding:10px"><%= orders[i].cart.items[key].qty %></td>
+          <td align="center" style="padding:10px"><%= orders[i].cart.items[key].price %></td>
+        </tr>
+        <% } %>
+      </table>
+      <div style="border:solid 1px gray; background-color: #F2F1F0">
+        <p>Total Price : Rs <%= orders[i].cart.totalPrice %></h4>
+      </div>
+      <br><br>
+      <% } %>
+    </div>
+
+
+</center>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>  
+   
+<footer>
+  <% include footer.ejs %>
+</footer>
+
+</body>
+</html>

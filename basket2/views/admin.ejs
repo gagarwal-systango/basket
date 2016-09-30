@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shopping Cart</title>
+<style>
+.admin div {
+  margin-bottom: 10px;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="css/c_style.css">
+</head>
+<body>
+
+<header>
+  <% include header.ejs %>
+</header>
+
+    <br>
+
+    <div class="banner" align="center">
+      <h style="font-weight:100; font-size:2.5em">Welcome Admin!</h>
+    </div>
+
+    <div class="admin" style="padding:80px">
+      <h3>Select Your Choice:</h3>
+
+      <!-- <div>
+        <a href="/admin/addProduct">Add Products in the list</a>
+        <form action="/admin/addProduct" enctype="multipart/form-data" method="post">
+          <input type="file" name="products" size="50" accept=".json" />
+          <input type="submit" value="Upload File" />
+        </form>
+
+          
+      </div> -->
+
+      <div>
+        <a href="/admin/updateProduct">update product details</a>
+      </div>
+
+      <div>
+        <a href="/admin/addProduct">Add a new product</a>
+      </div>
+
+      <div>
+        <a href="/admin/user">See all the users details</a>
+      </div>
+
+     <!--  <div>
+        <a href="/admin/updateUser/:id">Check a users details</a>
+      </div> -->
+    </div>
+
+<footer>
+  <% include footer.ejs %>
+</footer>
+
+</body>
+</html>

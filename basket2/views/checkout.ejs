@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<link rel="stylesheet" type="text/css" href="css/c_style.css">
+</head>
+
+<header>
+  <% include header.ejs %>
+</header>
+
+ <div align="center">
+       <table style=" solid #d9d9d9""><tr><td>
+       <form action="/add-to-cart/checkout" method="post" >
+       <table cellspacing="15">
+         <tr>
+           <td align="center">
+            <h1>Checkout</h1>
+            <h4>Your Total: <%= totalPrice %> Rs.</h4>
+          </td>
+         </tr>
+         <tr>
+            <td >
+              <label for="name" >Name</label><br>
+              <input type="text" name="name" size="30" required>
+            </td>
+         </tr>
+         <tr>
+            <td>
+            <label for="address" >Address</label><br>
+            <input type="text" name="address" size="30" required>
+            </td>
+         </tr>
+         <tr>
+            <td >
+              <label for="card-name" >Card Holder Name</label><br>
+              <input type="text" name="card-name" size="30" required>
+            </td>
+         </tr>
+         <tr>
+            <td >
+              <label for="card-number" >Card Number</label><br>
+              <input type="text" name="card-number" size="30" required>
+            </td>
+         </tr>
+         <tr>
+             <td align="center"><input type="submit" value="SUBMIT"style="backgroundcolor:#B0C4DE;color:black;height:45px;width:100px; border-radius: 25px" ></td>
+         </tr>
+       </table>
+       </form></td></tr></table>
+    </div>
+
+<footer>
+  <% include footer.ejs %>
+</footer>
+
+</body>
+</html>

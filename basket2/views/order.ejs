@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shopping Cart</title>
+<link rel="stylesheet" type="text/css" href="css/c_style.css">
+</head>
+<body>
+
+<header>
+  <% include header.ejs %>
+</header>
+
+    
+    <br>
+    <center>
+    <h1 style="color:black">Congratulations! Your order has been placed.</h1>
+    <div style:"padding:40px">
+    <h3>Your Orders</h3>
+    <p>orderId: <%= order._id %></p>
+    <p>Name: <%= order.name %></p>
+    </div>
+   <table width="70%" style="border: solid 1px black" cellspacing="5px">
+    <tr style="color: black">
+      <td align="center"><span class="table">Product</span></td>
+      <td align="center"><span class="table">Price</span></td>
+      <td align="center"><span class="table">Quantity</span></td>
+      <td align="center"><span class="table">Total</span></td>
+    </tr>
+
+<% for(var key in order.cart.items) { %>
+    <tr style="color: black">
+      <td align="center"><span class="table"><%= order.cart.items[key].item.title %></span></td>
+      <td align="center"><span class="table"><%= order.cart.items[key].item.price %></span></td>
+      <td align="center"><span class="table"><%= order.cart.items[key].qty %></span></td>
+      <td align="center"><span class="table"><%= order.cart.items[key].price %></span></td>
+    </tr>
+<% } %>
+ <br> <br> <br>
+   </table>
+    <h2>
+    Your Order Total : Rs <%= order.cart.totalPrice %>
+   </h2>
+    <!-- <form action="/add-to-cart/checkout">
+      <input type="submit" value="Proceed To Checkout" style="background-color:#B0C4DE;color:black;font-size:25px">
+    </form>
+    </center> -->
+    <br><br>
+
+<footer>
+  <% include footer.ejs %>
+</footer>
+
+</body>
+</html>

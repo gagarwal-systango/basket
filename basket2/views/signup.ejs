@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>New User Registration</title>
+<link rel="stylesheet" type="text/css" href="css/c_style.css">
+</head>
+<body>
+
+<header>
+  <% include header.ejs %>
+</header>
+
+    <div class="banner" align="center">
+    <br><br><br>
+        <h1>A fresh approach to Shopping</h3>
+        <br><br><br>
+    </div>
+
+
+<!-- show any messages that come back with authentication -->
+    <% if (message.length > 0) { %>
+        <div align="center" style="color: red"><%= message %>!</div>
+    <% } %>
+
+
+    <div align="center">
+       <table style=" solid #d9d9d9""><tr><td>
+       <form action="/user/signup" method="post" >
+       <table cellspacing="15">
+         <tr>
+           <td align="center"><h2 style="color:black">Please Register to Continue</h2></td>
+         </tr>
+         <tr>
+            <td ><input type="text" name="user_id" size="40" placeholder="User	ID" style="color:gray" >
+            </td>
+         </tr>
+         <tr>
+            <td ><input type="password" name="password" size="40" placeholder="Password" style="color:gray" ></td>
+         </tr>
+         <tr>
+            <td ><input type="password" name="cnfpassword" size="40" placeholder="Confirm Password" style="color:gray" >
+            </td>
+         </tr>
+         <tr>
+             <td align="center"><input type="submit" value="SUBMIT"style="backgroundcolor:#B0C4DE;color:black;height:45px;width:100px; border-radius: 25px" ></td>
+         </tr>
+       </table>
+       </form></td></tr></table>
+    </div>
+    <br><br>
+
+<footer>
+  <% include footer.ejs %>
+</footer>
+
+</body>
+</html>

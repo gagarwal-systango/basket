@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+<link rel="stylesheet" type="text/css" href="css/c_style.css">
+        
+        <title>The Basket for Online Shopping</title>
+    </head>
+
+    <body>
+
+<!-- show any messages that come back with authentication -->
+  <% if (message.length > 0) { %>
+    <div align="center" style="color: black"><%= message %>!</div>
+  <% } %>
+
+<header>
+  <% include header.ejs %>
+</header>
+           
+
+
+        <div class="Main">
+          <div class="tag" style="height:400px; width:400px; margin: 100px 50px 50px 80px">
+            <span style="height:300px; width:400px">
+              <h1>Welcome to our <br> ever growing Basket<br>An exciting place for the whole family to shop.  </h1>
+            </span>
+          </div>
+		      <!-- <div class="tag" style="height:400px; width:400px;  padding:20px; margin: 100px 50px 50px 50px" >
+            <img style="height:300px; width:400px" src="https://thumbs.dreamstime.com/t/laptop-steel-shopping-basket-concept-online-shopping-d-rendering-isolated-white-background-57361141.jpg">
+          </div> -->
+        </div>
+
+<footer>
+  <% include footer.ejs %>
+</footer>
+
+</body>
+
+</html>

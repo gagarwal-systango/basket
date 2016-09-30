@@ -1,0 +1,216 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('basket1:server');
+var http = require('http');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Get IP Address of server
+ */
+function getIPAddresses() {
+
+    var ipAddresses = [];
+
+    var interfaces = require('os').networkInterfaces();
+    for (var facesName in interfaces) {
+        var iface = interfaces[facesName];
+        for (var i = 0; i < iface.length; i++) {
+            var alias = iface[i];
+            if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+                ipAddresses.push(alias.address);
+            }
+        }
+    }
+
+    return ipAddresses[0];
+}
+
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer();
+
+//pass request to express app
+//server.on('request', handleClient);
+server.on('request', app);
+
+var ipAddress = getIPAddresses();
+
+var maxClients = 1;
+var currentClients = 0;
+var _pending = [];
+
+//process the pending requests when current client is less than maximum clients 
+function process_pending()
+{
+  if (_pending.length > 0) {
+    var arr = _pending.shift();
+    var req = arr[0];
+    var res = arr[1];
+    currentClients++;
+    app(req, res);
+    currentClients--;
+    process.nextTick(process_pending);
+  }
+}
+
+function client_limit(req, res) 
+{
+  
+  if (currentClients < maxClients) {
+    //it will increase the current client for given request 
+    currentClients++;
+    //now it will process the request by executing app function 
+    //and will reduce the currentClient count
+    app(req, res);
+    currentClients--;
+    process.nextTick(process_pending);
+  }
+  else {
+    console.log('Overloaded, queuing clients...');
+    _pending.push([req, res]);
+  }
+}
+
+
+function handleClient(req, res){
+  console.log(req.connection.remoteAddress +" "+ req.method +" "+req.url);
+
+  client_limit(req, res);
+
+}
+
+
+
+// http.createServer(function(req, res) {
+//   var bufs = [];
+//   var done_buffering = false;
+
+//   client_limit(function(done){
+//     var proxy = http.createClient(3000, ipAddress);
+//     var preq = proxy.request(req.method, req.url, req.headers);
+
+//     console.log(req.connection.remoteAddress +" "+ req.method +" "+req.url);
+//     preq.on('response', function(pres) {
+//       res.writeHead(pres.statusCode, pres.headers);
+//       util.pump(pres, res);
+//       pres.on('end', function() {
+//         preq.end();
+//         res.end();
+//         done();
+//       });
+//     });
+
+//     function finishreq() {
+//       bufs.forEach(function(buf){
+//         preq.write(buf);
+//       });
+//       preq.end();
+//     }
+
+//     if (done_buffering) {
+//       finishreq();
+//     }
+//     else {
+//       req.on('end', function() {
+//         finishreq();
+//       });
+//     }
+//   });
+
+//   req.on('data', function(chunk) {
+//     var tbuf = new Buffer(chunk.length);
+//     chunk.copy(tbuf, 0, 0);
+//     bufs.push(tbuf);
+//   });
+
+//   req.on('end', function() {
+//     done_buffering = true;
+//   });
+
+// }).listen(3000);
+
+
+
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+
+server.listen(port, ipAddress);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

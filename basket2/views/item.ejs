@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Item</title>
+<link rel="stylesheet" type="text/css" href="css/c_style.css">
+</head>
+<body>
+
+<header>
+  <% include header.ejs %>
+</header>
+
+    <br>
+
+    <div>
+        <table>
+           <tr>
+             <td rowspan=3><img src="<%= item.image_url %>" height="300px" width="250px"></td>
+             <td><span class="item"><%= item.title %></span></td>
+           </tr>
+           <tr>
+             <td><span class="price">Rs. <%= item.price %></span></td>
+           </tr>
+           <tr>
+             <td><span class="desc">Key Features: <br><%= item.overview %></span></td>
+           </tr>
+           <tr>
+             <td><form name="laptop" action="/add-to-cart/products/<%= item._id %>" method="get" >
+                       <!-- <p>Qty.      <input type="text" name="quantity" size="3"></p>/ -->
+                       <!-- <input type="hidden" name="product" value="Laptop">
+                       <input type="hidden" name="price" value="55490"> -->
+                       <input type="submit" value="Add to Cart" style="background-color:#B0C4DE;color:black;font-size:25px" >
+                 </form>
+             </td>
+           </tr>
+        </table>
+    </div>
+    <hr>
+
+<footer>
+  <% include footer.ejs %>
+</footer>
+
+</body>
+</html>

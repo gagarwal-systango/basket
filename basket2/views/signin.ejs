@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<link rel="stylesheet" type="text/css" href="css/c_style.css">
+</head>
+<body>
+
+<header>
+  <% include header.ejs %>
+</header>
+
+    <div class="banner" align="center"> <!-- style="background:url(./images.jpg)" -->
+    <br><br><br>
+        <h1>A fresh approach to Shopping</h3>
+    <br><br><br>
+    </div>
+
+<!-- show any messages that come back with authentication -->
+    <% if (message.length > 0) { %>
+        <div align="center" style="color: red"><%= message %>!</div>
+    <% } %>
+
+
+    <div align="center">
+       <table><tr><td>
+       <form action="/user/signin" method="post" name="loginform" >
+       <table  cellspacing="15">
+         <tr>
+           <td colspan="2" align="center"><h2 style="color:black">Login in to your Account</h2></td>
+         </tr>
+         <tr>
+            <td colspan="2" ><input type="text" name="user_id" size="27" placeholder="UserId" style="color:gray" >
+            </td>
+         </tr>
+         <tr>
+            <td colspan="2" ><input type="password" name="password" size="27" placeholder="Password" style="color:gray" ></td>
+         </tr>
+         <tr>
+             <td colspan="2" align="center"><input type="submit" value="LOGIN" style="background-color:#B0C4DE;color:black;height:35px;width:70px; border-radius: 25px" ></td>
+         </tr>
+         <tr>
+            <td><a href="/user/signin" style="color:black">Forgot Password</a></td>
+            <td><a href="/user/signup" style="color:black">Register</a>
+       </table>
+       </form></td></tr></table>
+    </div><br><br><br><br><br><br>
+
+<footer>
+  <% include footer.ejs %>
+</footer>
+
+</body>
+</html>

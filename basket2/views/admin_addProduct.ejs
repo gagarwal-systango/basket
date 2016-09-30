@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shopping Cart</title>
+<style>
+.admin div {
+  margin-bottom: 10px;
+}
+<style type="text/css">
+.admin-options a {
+  float: right;
+  display: inline-block;
+  padding: 10px;
+}
+</style>
+</style>
+<link rel="stylesheet" type="text/css" href="/css/c_style.css">
+</head>
+<body>
+
+<header>
+  <% include header.ejs %>
+</header>
+
+<div class="admin-options" align="left" >
+  <a href="/admin" style="text-decoration:none"><h3>Admin</h3></a>
+</div>
+
+  <div>
+    <h3><%= msg %></h3>
+  </div>
+
+
+    <div align="center">
+     <table style=" solid #d9d9d9"">
+     <form action="/admin/addProduct" method="post" name="updateProduct">
+     <table cellspacing="15">
+       <tr>
+          <td id="title">
+            <label for="title">Title:</label>
+            <% if(product!=null){ %>
+              <%= product.title %><br>
+            <% }else{ %>
+              <br><input type="text" name="title" size="30" placeholder="Title" required />
+            <% } %>
+          </td>
+      </tr>      
+      <tr>
+          <td id="price">
+            <label for="price" >Price:</label>
+            <% if(product){ %>
+            <%= product.price %><br>
+            <% }else{ %>
+            <br></b><input type="text" name="price" size="30" placeholder="Price" required />
+            <% } %>
+          </td>
+      </tr>
+      <tr>
+          <td id="overview">
+            <label for="overview" >Overview:</label>
+            <% if(product){ %>
+            <%= product.overview %><br>
+            <% }else{ %>
+            <br><input type="text" name="overview" size="30" placeholder="Overview" required />
+            <% } %>
+          </td>
+      </tr>
+      <tr>
+          <td id="catagory"> 
+            <label for="catagory" >Catagory:</label>
+            <% if(product){ %>
+            <%= product.catagory %><br>
+            <% }else{ %>
+            <br><input type="text" name="catagory" size="30" placeholder="Catagory" required />
+            <% } %>
+          </td>
+      </tr>
+      <tr>
+          <td id="image_url">
+            <label for="image_url" >Image_url:</label>
+            <% if(product){ %>
+            <%= product.image_url %><br>
+            <% }else{ %>
+            <br><input type="text" name="image_url" size="30" placeholder="image_url" required  />
+            <% } %>
+          </td>
+      </tr>
+      <tr>
+          <% if(!product){ %>
+          <td align="center"><input type="submit" value="SUBMIT"style="backgroundcolor:#B0C4DE;color:black;height:45px;width:100px; border-radius: 25px">
+          </td>
+          <% } %>
+      </tr>
+    </table>
+    </form>
+  </table>
+  </div>
+
+ 
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<footer>
+  <% include footer.ejs %>
+</footer>
+
+</body>
+</html>
